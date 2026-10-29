@@ -95,13 +95,23 @@ class AdminController extends Controller
         return view('admin.estudantes.edit', compact('estudante'));
     }
 
-   public function update(Request $request, $id)
+  public function update(Request $request, $id)
 {
     $estudante = Estudante::findOrFail($id);
     $data = $request->except(['_token', '_method']);
-    $estudante->update($data);
-        return redirect()->route('admin.estudantes.index')->with('success', 'Atualiza ona!');
+    
+    // Fix CHECK constraint: ubah Prosesa jadi lowercase proses
+    if (isset($data['status'])) {
+        $status = strtolower($data['status']);
+        // sesuaikan dengan yang ada di migrasi kamu
+        if ($status == 'prosesa' || $status == 'proses') $data['status'] = 'proses';
+        if ($status == 'aprovadu' || $status == 'diterima') $data['status'] = 'diterima';
+        if ($status == 'rejeitadu' || $status == 'ditolak') $data['status'] = 'ditolak';
     }
+    
+    $estudante->update($data);
+    return redirect()->route('admin.estudantes.index')->with('success', 'Atualiza ona!');
+}
 
     public function destroy($id)
     {
