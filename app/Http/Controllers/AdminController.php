@@ -95,10 +95,11 @@ class AdminController extends Controller
         return view('admin.estudantes.edit', compact('estudante'));
     }
 
-    public function update(Request $request, $id)
-    {
-        $estudante = Estudante::findOrFail($id);
-        $estudante->update($request->all());
+   public function update(Request $request, $id)
+{
+    $estudante = Estudante::findOrFail($id);
+    $data = $request->except(['_token', '_method']);
+    $estudante->update($data);
         return redirect()->route('admin.estudantes.index')->with('success', 'Atualiza ona!');
     }
 
