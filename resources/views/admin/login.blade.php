@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="tet">
 <head>
-    <link rel="icon" href="{{ asset('images/logo-estv-gti.webp') }}" type="image/webp">
+    <link rel="icon" type=image/webp href="{{ asset('logo-estv-gti.webp') }}" type="image/webp">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin — ESTV-GTI Becora</title>
